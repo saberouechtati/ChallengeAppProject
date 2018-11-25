@@ -1,4 +1,4 @@
-package saber.com.challengeappproject.ui.repositorylist;
+package saber.com.challengeappproject.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 

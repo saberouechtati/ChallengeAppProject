@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import saber.com.challengeappproject.R;
+import saber.com.challengeappproject.viewmodels.RepositoryListViewModel;
 
 public class RepositoryListFragment extends Fragment {
 
