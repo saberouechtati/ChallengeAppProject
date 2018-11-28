@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Challenge App Project</string>
     <string name="element_text">Element</string>
+    <string name="repoStarText">Stars: </string>
+    <string name="repoForkText">Forks: </string>
+    <string name="repoBranchText">Branches: </string>
+    <string name="repoNameText">Repository: </string>
+    <string name="starImgDiscription">Star icon</string>
+    <string name="forkIconDescription">Fork icon</string>
+    <string name="branchIconDescription">Branch icon</string>
 </resources>

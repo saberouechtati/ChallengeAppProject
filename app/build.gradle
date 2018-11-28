@@ -25,7 +25,9 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleExtensionsVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.recyclerViewVersion"
     implementation "com.android.support:cardview-v7:$rootProject.cardViewVersion"
+    implementation "com.android.support:design:$rootProject.designVersion"
 
+    // Testing dependencies
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.testEspressoCoreVersion"
