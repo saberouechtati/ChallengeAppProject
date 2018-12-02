@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,15 @@ import android.view.animation.LayoutAnimationController;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.saber.challengeapp.adapters.RecyclerViewAdapter;
 import com.saber.challengeapp.data.GitHubUserRepo;
+import com.saber.challengeapp.utils.Destinations;
 import com.saber.challengeapp.viewmodels.SharedViewModel;
 import com.saber.challengeappproject.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static com.saber.challengeapp.utils.Destinations.Master_UserRepoSearch;
 
 
 /**
@@ -70,8 +73,6 @@ public class UserRepoListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //Opening transition animations
-        // getActivity().overridePendingTransition(R.anim.fragment_open_translate, R.anim.fragment_close_scale);
 
         // Initialize the root view
         View rootView = inflater.inflate(R.layout.repository_list_fragment, container, false);
@@ -89,16 +90,10 @@ public class UserRepoListFragment extends Fragment {
         displayLodingAnimation();
 
         // Add FloatingActionButton
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
 
         // Sets the FloatingActionButton's OnClick event listener
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> sharedViewModel.navigate(Master_UserRepoSearch));
 
         // Rturn the root view
         return rootView;
@@ -120,8 +115,7 @@ public class UserRepoListFragment extends Fragment {
 
         // Prepare the GitHub user repository list to display
         // Initialize the ViewModel
-        sharedViewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
-        Log.i(TAG, "------->>>> sharedViewModel:  " + sharedViewModel);
+        sharedViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(SharedViewModel.class);
         sharedViewModel.getUserRepoList(this.getContext()).observe(getViewLifecycleOwner(), userRepoList -> {
             // Update UI
             if (userRepoList != null) {
@@ -142,7 +136,7 @@ public class UserRepoListFragment extends Fragment {
     @Override
     public void onPause() {
         //closing transition animations
-        getActivity().overridePendingTransition(R.anim.fragment_open_scale, R.anim.fragment_close_translate);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.fragment_open_scale, R.anim.fragment_close_translate);
         super.onPause();
     }
 
@@ -178,7 +172,7 @@ public class UserRepoListFragment extends Fragment {
 
         // Set the mRecyclerView animation
         mRecyclerView.setLayoutAnimation(layoutAnimationController);
-        mRecyclerView.getAdapter().notifyDataSetChanged();
+        Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
         mRecyclerView.scheduleLayoutAnimation();
     }
 }

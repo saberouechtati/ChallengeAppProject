@@ -1,5 +1,8 @@
 package com.saber.challengeapp.utils;
 
+/**
+ * Enum of destinations
+ */
 public enum Destinations {
     Start_SplashScreen,
     Splash_UserRepoList,

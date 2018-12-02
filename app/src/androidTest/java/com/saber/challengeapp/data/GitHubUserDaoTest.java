@@ -36,8 +36,8 @@ public class GitHubUserDaoTest {
     public void createDb() throws Exception {
         Context appContext = InstrumentationRegistry.getTargetContext();
         testDb = Room.inMemoryDatabaseBuilder(appContext, AppDatabase.class)
-            .allowMainThreadQueries()
-            .build();
+                .allowMainThreadQueries()
+                .build();
         testGitHubUserDao = testDb.gitHubUserDao();
     }
 
@@ -55,7 +55,7 @@ public class GitHubUserDaoTest {
 
     @Test
     public void onFetchingUsers_shouldGetEmptyList_IfTable_IsEmpty() throws InterruptedException {
-        List <GitHubUser> testUserList = LiveDataTestUtil.getValue(testGitHubUserDao.getAll());
+        List<GitHubUser> testUserList = LiveDataTestUtil.getValue(testGitHubUserDao.getAll());
         assertTrue(testUserList.isEmpty());
     }
 
@@ -74,7 +74,7 @@ public class GitHubUserDaoTest {
 
     @Test
     public void onUserDeletion_CheckIf_UserIsDeletedFromTable() throws InterruptedException {
-        List <GitHubUser> testUserList = TestDataSourceUtil.getTestUserList(7);
+        List<GitHubUser> testUserList = TestDataSourceUtil.getTestUserList(7);
         testGitHubUserDao.insertAll(testUserList);
         testGitHubUserDao.delete(testUserList.get(2));
         assertNull(LiveDataTestUtil.getValue(testGitHubUserDao.findById(testUserList.get(2).getId())));
@@ -82,7 +82,7 @@ public class GitHubUserDaoTest {
 
     @Test
     public void onAllUsersDeletion_CheckIf_UsersAreDeletedFromTable() throws InterruptedException {
-        List <GitHubUser> testUserList = TestDataSourceUtil.getTestUserList(7);
+        List<GitHubUser> testUserList = TestDataSourceUtil.getTestUserList(7);
         testGitHubUserDao.insertAll(testUserList);
         testGitHubUserDao.deleteAll();
         assertEquals(0, LiveDataTestUtil.getValue(testGitHubUserDao.getAll()).size());

@@ -1,27 +1,27 @@
 package com.saber.challengeapp;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
+import com.saber.challengeapp.ui.SearchFragment;
 import com.saber.challengeapp.ui.UserRepoDetailFragment;
 import com.saber.challengeapp.ui.UserRepoListFragment;
 import com.saber.challengeapp.ui.SplashFragment;
 
-import com.saber.challengeapp.utils.Destinations;
 import com.saber.challengeapp.viewmodels.SharedViewModel;
 import com.saber.challengeappproject.R;
 
 import static com.saber.challengeapp.utils.Destinations.Splash_UserRepoList;
 import static com.saber.challengeapp.utils.Destinations.Start_SplashScreen;
 
+/**
+ * This is the entry point of this application
+ */
 public class MainActivity extends AppCompatActivity {
 
     // The class tag
@@ -43,19 +43,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
         context = this;
-
         if (savedInstanceState == null) {
+//            // Initialize and display the splash screen
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.container, SplashFragment.newInstance())
+//                    .commitNow();
 
-            getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, SplashFragment.newInstance())
-                .commitNow();
-
+            // Initialize the shared ViewModel
             sharedViewModel = ViewModelProviders.of(this).get(SharedViewModel.class);
-            Log.i(TAG, "------->>>> sharedViewModel:  " + sharedViewModel);
-            sharedViewModel.getNavigation().observe(this, destinations -> {
-                switch(destinations) {
+
+            // Observes and navigate betwen destinations
+            sharedViewModel.getDestination().observe(this, destinations -> {
+                switch (destinations) {
                     case Start_SplashScreen:
                         navigateToSplashScreen();
                         break;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         Handler handler = new Handler();
                         handler.postDelayed(() -> {
                             navigateToUserRepoDetail();
-                        },1000);
+                        }, 1000);
                         break;
                     case Master_UserRepoSearch:
                         navigateToSearch();
@@ -84,50 +84,73 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This sart the application by navigate to the splash screen,
+     * and after 2000 milliseconds navigate to the Master destination (user repository list fragment)
+     */
     private void navigateToSplashScreen() {
+        // Initialize, display, and navigate to the splash screen destination
         fragment = SplashFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
                 .replace(R.id.container, fragment)
                 .commitNow();
 
+        // Handler: after 2000 milliseconds navigates from the splash screen
+        // to the user repository list destination
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             // Navigate to UserRepoList destination.
             sharedViewModel.navigate(Splash_UserRepoList);
-        },2000);
+        }, 2000);
     }
 
+    /**
+     * Navigats to the login dstination
+     */
     private void navigateToLogin() {
+        // Initialize, display, and navigate to the login destination
         fragment = UserRepoListFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
-            .replace(R.id.container, fragment)
-            .commitNow();
+                .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
+                .replace(R.id.container, fragment)
+                .commitNow();
     }
 
+    /**
+     * Navigats to the search dstination
+     */
     private void navigateToSearch() {
-        fragment = UserRepoListFragment.newInstance();
+        // Initialize, display, and navigate the search destination
+        fragment = SearchFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
-            .replace(R.id.container, fragment)
-            .commitNow();
+                .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
+                .replace(R.id.container, fragment)
+                .commitNow();
     }
 
+    /**
+     * Navigats to the userRepoDetails dstination
+     */
     private void navigateToUserRepoDetail() {
+        // Initialize, display, and navigate to the user repository detail destination
         fragment = UserRepoDetailFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
-            .replace(R.id.container, fragment)
-            .commitNow();
+                .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
+                .replace(R.id.container, fragment)
+                .commitNow();
     }
 
+    /**
+     * Navigats to the master/ userRepoList dstination
+     */
     private void navigateToUserRepoList() {
+        // Initialize, display, and navigate to the user repository list destination
         fragment = UserRepoListFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-            .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
-            .replace(R.id.container, fragment)
-            .commitNow();
+                .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
+                .replace(R.id.container, fragment)
+                .commitNow();
     }
 
     @Override
@@ -140,11 +163,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        switch(sharedViewModel.getNavigation().getValue()) {
+        switch (sharedViewModel.getDestination().getValue()) {
             case Splash_UserRepoList:
                 super.onBackPressed();
                 break;
             case Master_UserRepoDetail:
+                sharedViewModel.navigate(Splash_UserRepoList);
+                break;
+            case Master_UserRepoSearch:
                 sharedViewModel.navigate(Splash_UserRepoList);
                 break;
             default:

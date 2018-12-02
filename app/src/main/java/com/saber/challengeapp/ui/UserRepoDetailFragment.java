@@ -1,20 +1,19 @@
 package com.saber.challengeapp.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.saber.challengeapp.data.GitHubUserRepo;
 import com.saber.challengeapp.viewmodels.SharedViewModel;
 import com.saber.challengeappproject.R;
+
+import java.util.Objects;
 
 
 /**
@@ -45,7 +44,8 @@ public class UserRepoDetailFragment extends Fragment {
     private TextView updatedAtTV;
 
     // Required empty public constructor
-    public UserRepoDetailFragment() {}
+    public UserRepoDetailFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment.
@@ -53,13 +53,12 @@ public class UserRepoDetailFragment extends Fragment {
      * @return A new instance of fragment UserRepoDetailFragment.
      */
     public static UserRepoDetailFragment newInstance() {
-        return  new UserRepoDetailFragment();
+        return new UserRepoDetailFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "---------->>>> oncreate...");
     }
 
     @Override
@@ -68,7 +67,6 @@ public class UserRepoDetailFragment extends Fragment {
 
         // Initialize the root view, inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        Log.i(TAG, "---------->>>> onCreateView...");
 
         // Sets the tag of the root view
         rootView.setTag(TAG);
@@ -94,108 +92,91 @@ public class UserRepoDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Log.i(TAG, "---------->>>> onActivityCreated...");
-        Log.i(TAG, "------->>>> before observe");
-
         // Initialize sharedViewModel
-        sharedViewModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
-        Log.i(TAG, "------->>>> sharedViewModel:  " + sharedViewModel);
+        sharedViewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(SharedViewModel.class);
 
         // Observe the selected user repository
         sharedViewModel.getSelectedUserRepo().observe(getViewLifecycleOwner(), userRepo -> {
             // White space
-            final String WHITE_SPACE=" ";
-
-            Log.i(TAG, "------->>>> userRepo: " + userRepo);
+            final String WHITE_SPACE = " ";
 
             // Update UI
-            if(userRepo != null) {
-
-                GitHubUserRepo selecteduserRepo = userRepo;
-
-                Log.i(TAG, "------->>>> Name: " + selecteduserRepo.getName());
-                Log.i(TAG, "------->>>> Full name: " + selecteduserRepo.getFullName());
+            if (userRepo != null) {
 
                 // Update the nameTV's text
                 nameTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.name_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getName()));
+                        .append(userRepo.getName()));
 
                 // Update the fullNameTV's text
                 fullNameTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.full_name_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getFullName()));
+                        .append(userRepo.getFullName()));
 
                 // Update the descriptionTV's text
                 descriptionTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.description_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getDescription()));
+                        .append(userRepo.getDescription()));
 
                 // Update the languageTV's text
                 languageTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.language_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getLanguage()));
+                        .append(userRepo.getLanguage()));
 
                 // Update the ownerTV's text
                 ownerTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.owner_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getUser().getName()));
+                        .append(userRepo.getUser().getName()));
 
                 // Update the watchersTV's text
                 watchersTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.watchers_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getWatchersCount()));
+                        .append(userRepo.getWatchersCount()));
 
                 // Update the starsTV's text
                 starsTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.star_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getStarsCount()));
+                        .append(userRepo.getStarsCount()));
 
                 // Update the branchesTV's text
                 branchesTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.branches_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getBranchesCount()));
+                        .append(userRepo.getBranchesCount()));
 
                 // Update the forksTV's text
                 forksTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.forks_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getForksCount()));
+                        .append(userRepo.getForksCount()));
 
                 // Update the createdAtTV's text
                 createdAtTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.created_on_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getCreatedAt().substring(0,10)));
+                        .append(userRepo.getCreatedAt().substring(0, 10)));
 
                 // Update the updatedAtTV's text
                 updatedAtTV.setText(new StringBuilder()
                         .append(getResources().getString(R.string.last_update_on_text))
                         .append(WHITE_SPACE)
-                        .append(selecteduserRepo.getUpdateddAt().substring(0, 10)));
+                        .append(userRepo.getUpdatedAt().substring(0, 10)));
             }
         });
 
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.i(TAG, "---------->>>> onAttach...");
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.i(TAG, "---------->>>> onResume...");
+    public void onPause() {
+        //closing transition animations
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.fragment_open_scale, R.anim.fragment_close_translate);
+        super.onPause();
     }
 }

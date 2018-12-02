@@ -11,7 +11,9 @@ import android.content.Context;
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
+
     public abstract GitHubUserDao gitHubUserDao();
+
     public abstract GitHubUserRepoDao gitHubUserRepoDao();
 
     public static AppDatabase getAppDatabase(Context context) {

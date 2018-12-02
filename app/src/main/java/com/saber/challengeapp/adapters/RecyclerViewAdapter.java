@@ -19,7 +19,7 @@ import com.saber.challengeapp.viewmodels.SharedViewModel;
 import com.saber.challengeappproject.R;
 
 /**
- *  A custom Adapter for RecyclerView's views
+ * A custom Adapter for RecyclerView's views
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
@@ -88,9 +88,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             // Initialize the repository stars number TextView
             repositoryStarsTV = view.findViewById(R.id.repoStarsTextView);
-
-
-
         }
 
         /**
@@ -140,13 +137,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         /**
          * Sets the view context
+         *
          * @param context the new context
          */
         public void setContext(Context context) {
             this.context = context;
         }
-
-
     }
 
     /**
@@ -176,44 +172,44 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d(TAG, "Element " + position + " set.");
 
         // White space
-        final String WHITE_SPACE=" ";
+        final String WHITE_SPACE = " ";
 
         // Gets the GitHub repository from the repository list mRepositoryList at this position
         GitHubUserRepo repository = mRepositoryList.get(position);
 
         // Chek the name length, if longer than 30, the cut the name
-        if(repository.name.length() > 30) {
-            repository.name = (new StringBuilder().append(repository.name.substring(0,29))
-                .append("...")).toString();
+        if (repository.name.length() > 30) {
+            repository.name = (new StringBuilder().append(repository.name.substring(0, 29))
+                    .append("...")).toString();
         }
 
         // Replace the contents of the view with that element attributes.
         // Replace the content of repositoryNameTV
         viewHolder.getRepositoryNameTV().setText(new StringBuilder()
-            .append(viewHolder.getContext().getResources().getString(R.string.repoNameText))
-            .append(WHITE_SPACE)
-            .append(repository.name)
+                .append(viewHolder.getContext().getResources().getString(R.string.repoNameText))
+                .append(WHITE_SPACE)
+                .append(repository.name)
         );
 
         // Replace the content of repositoryBranchesTV
         viewHolder.getRepositoryBranchesTV().setText(new StringBuilder()
-            .append(viewHolder.getContext().getResources().getString(R.string.repoBranchText))
-            .append(WHITE_SPACE)
-            //.append(repository.branchesCount)
+                .append(viewHolder.getContext().getResources().getString(R.string.repoBranchText))
+                .append(WHITE_SPACE)
+                .append(repository.branchesCount)
         );
 
         // Replace the content of repositoryForksTV
         viewHolder.getRepositoryForksTV().setText(new StringBuilder()
-            .append(viewHolder.getContext().getResources().getString(R.string.repoForkText))
-            .append(WHITE_SPACE)
-            .append(repository.forksCount)
+                .append(viewHolder.getContext().getResources().getString(R.string.repoForkText))
+                .append(WHITE_SPACE)
+                .append(repository.forksCount)
         );
 
         // Replace the content of repositoryStarsTV
         viewHolder.getRepositoryStarsTV().setText(new StringBuilder()
-            .append(viewHolder.getContext().getResources().getString(R.string.repoStarText))
-            .append(WHITE_SPACE)
-            .append(repository.starsCount)
+                .append(viewHolder.getContext().getResources().getString(R.string.repoStarText))
+                .append(WHITE_SPACE)
+                .append(repository.starsCount)
         );
     }
 

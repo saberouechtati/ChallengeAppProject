@@ -6,10 +6,11 @@
     android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/repositoryDetails"
+        android:id="@+id/repositorySearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/grayLight"
+        android:minHeight="185dp"
         android:paddingLeft="20dp"
         android:paddingTop="30dp"
         android:paddingRight="20dp"

@@ -26,7 +26,7 @@ public class LoginFragment extends Fragment {
      * @return A new instance of fragment UserRepoDetailFragment.
      */
     public static LoginFragment newInstance() {
-        return  new LoginFragment();
+        return new LoginFragment();
     }
 
     @Override

@@ -10,7 +10,8 @@ import java.lang.reflect.Type;
 public class Converters {
     @TypeConverter
     public static GitHubUser fromString(String value) {
-        Type listType = new TypeToken<String>() {}.getType();
+        Type listType = new TypeToken<String>() {
+        }.getType();
         return new Gson().fromJson(value, listType);
     }
 
@@ -20,5 +21,4 @@ public class Converters {
         String json = gson.toJson(user);
         return json;
     }
-
 }

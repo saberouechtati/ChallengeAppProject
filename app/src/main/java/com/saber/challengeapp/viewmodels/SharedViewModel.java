@@ -18,50 +18,82 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This helps the communication between the activity and fragments.
+ * Helps updating the UI using LiveData.
+ */
 public class SharedViewModel extends ViewModel {
 
     private Context context;
 
-    //The selected navigation state
-    private final MutableLiveData<Destinations> navigation = new MutableLiveData<>();
+    // The GitHub username
+    private final MutableLiveData<String> username = new MutableLiveData<>();
+
+    // The selected destination state
+    private final MutableLiveData<Destinations> destination = new MutableLiveData<>();
 
     // The GitHub user repository list to display
     private MutableLiveData<List<GitHubUserRepo>> userRepoList;
 
-    //The selected user repository to display
+    // The selected user repository to display
     private final MutableLiveData<GitHubUserRepo> selectedUserRepo = new MutableLiveData<>();
 
 
-    public LiveData<Destinations> getNavigation() {
-        return navigation;
+    // Gets the GitHub username
+    public LiveData<String> getUsername(Context context) {
+        if (this.username.getValue() == null)
+            username.setValue(context.getString(R.string.default_username));
+        return this.username;
     }
 
+    // Update the GitHub username
+    public void updateUsername(String username) {
+        this.username.setValue(username);
+    }
+
+    // Gets the destination
+    public LiveData<Destinations> getDestination() {
+        return destination;
+    }
+
+    // Change the destination
     public void navigate(Destinations destinations) {
-        this.navigation.setValue(destinations);
+        this.destination.setValue(destinations);
     }
 
+    // Gets the GitHub user repository list. if null, loads the list
     public LiveData<List<GitHubUserRepo>> getUserRepoList(final Context context) {
         if (userRepoList == null) {
             userRepoList = new MutableLiveData<>();
             this.context = context;
-            loadUserRepoList();
+            loadUserRepoList(getUsername(context).getValue());
         }
         return userRepoList;
     }
 
+    // Update the GitHub user repository list
+    public void updateUserRepoList() {
+        this.userRepoList = new MutableLiveData<>();
+        loadUserRepoList(getUsername(context).getValue());
+    }
+
+    // Gets the selected GitHub user repository
     public LiveData<GitHubUserRepo> getSelectedUserRepo() {
         return selectedUserRepo;
     }
 
+    // Update the selected GitHub user repository
     public void selectUserRepo(GitHubUserRepo userRepo) {
         if (userRepo != null) {
             this.selectedUserRepo.setValue(userRepo);
         }
     }
 
-    private void loadUserRepoList() {
+    // Loads the selected GitHub user repository list
+    public void loadUserRepoList(String username) {
+        // Loads the list using Retrofit
         GitHubService gitHubService = new GitHubServiceBuilder().getService();
-        Call<List<GitHubUserRepo>> userRepoListCall = gitHubService.listRepos("facebook");
+        Call<List<GitHubUserRepo>> userRepoListCall = gitHubService.listRepos(username);
         userRepoListCall.enqueue(new Callback<List<GitHubUserRepo>>() {
 
             @Override
@@ -80,7 +112,7 @@ public class SharedViewModel extends ViewModel {
             public void onFailure(Call<List<GitHubUserRepo>> call, Throwable t) {
                 userRepoList.setValue(null);
                 Toast.makeText(context,
-                        context.getString(R.string.no_network),
+                        context.getString(R.string.Load_failed),
                         Toast.LENGTH_SHORT).show();
             }
         });
