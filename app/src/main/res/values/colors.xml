@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#A90000</color>
-    <color name="colorAccent">#E60000</color>
+    <color name="colorAccent">#e60000</color>
     <color name="grayLight">#f0f0f0</color>
     <color name="grayDark">#808080</color>
 
     <color name="colorPrimaryDark_95">#95A90000</color>
+    <color name="transparent">#05000000</color>
     <color name="white_20">#20FFFFFF</color>
     <color name="black_overlay">#60C80000</color>
+    <color name="placeholder_bg">#dddddd</color>
 </resources>

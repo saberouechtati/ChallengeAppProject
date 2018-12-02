@@ -21,7 +21,7 @@ buildscript {
         // Testing dependencies
         junitVersion = '4.12'
         testRunnerVersion = '1.0.2'
-        testEspressoCoreVersion = '3.0.2'
+        testEspressoVersion = '3.1.0-alpha4'
     }
     repositories {
         google()

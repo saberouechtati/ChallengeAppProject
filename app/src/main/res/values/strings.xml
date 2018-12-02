@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Challenge App Project</string>
+    <string name="app_name">Challenge App</string>
     <string name="element_text">Element</string>
     <string name="repoStarText">Stars: </string>
     <string name="repoForkText">Forks: </string>
@@ -8,4 +8,34 @@
     <string name="starImgDiscription">Star icon</string>
     <string name="forkIconDescription">Fork icon</string>
     <string name="branchIconDescription">Branch icon</string>
+
+    <string name="no_network">Offline mode, please check network connection!</string>
+    <string name="search_text">Search</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="github_logo">GitHub Logo</string>
+    <string name="no_network_error_image">No network Error Image</string>
+    <string name="request_failed">Request not Sucessful</string>
+    <string name="app_version">Version 1.0</string>
+    <string name="detailsText">Details</string>
+    <string name="name_text">Name:</string>
+    <string name="full_name_text">Full name:</string>
+    <string name="description_text">Description:</string>
+    <string name="created_on_text">Created on:</string>
+    <string name="watchers_text">Watchers:</string>
+    <string name="language_text">Language:</string>
+    <string name="forks_text">Forks:</string>
+    <string name="star_text">Star:</string>
+    <string name="branches_text">Branches:</string>
+    <string name="last_update_on_text">Last Update on:</string>
+    <string name="owner_text">Owner:</string>
+    <string name="branches_icon">Branches icon </string>
+    <string name="calendar_icon">Calendar icon</string>
+    <string name="watchers_icon">Watchers icon</string>
+    <string name="forks_icon">Forks icon</string>
+    <string name="star_icon">Star icon</string>
+
 </resources>
