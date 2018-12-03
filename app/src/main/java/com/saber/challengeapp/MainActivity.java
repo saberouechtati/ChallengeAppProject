@@ -45,10 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         context = this;
         if (savedInstanceState == null) {
-//            // Initialize and display the splash screen
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.container, SplashFragment.newInstance())
-//                    .commitNow();
 
             // Initialize the shared ViewModel
             sharedViewModel = ViewModelProviders.of(this).get(SharedViewModel.class);
