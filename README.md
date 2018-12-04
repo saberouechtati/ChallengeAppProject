@@ -23,7 +23,7 @@ You can glone or download this project to your local machine.
 'android.arch.lifecycle:compile:r1.1.1'  
 'android.arch.lifecycle:extensions:1.1.1'
 
-## development concept base on (Android Jetpack Components and Retrofit) 
+## Development concept base on (Android Jetpack Components and Retrofit) 
 We have 5 distinations:  
 1. splash screen  
 2. Master destination, for display GitHub user's repository list (using RecyclerView)  
