@@ -1,7 +1,7 @@
 # ChallengeAppProject
 Android challenge application project to retrieve a list of public repositories of a GitHub user (for example: Facebook) using the Github API, and display them.
 
-## Prezentation: 
+## Presentation: 
 https://prezi.com/view/6tEBVW9R9tOrz5DL3ItN/
 
 
