@@ -31,6 +31,6 @@ We have 5 distinations:
 4. Search destination, for entering the GitHub username...
 5. Login destination, for the login (the login should be optional)
 
-We will have 1 single Activity and 5 Fragment to implement the 5 destinations. 
+We will have 1 single Activity and 5 Fragments to implement the 5 destinations. 
 For the communicatiom between the destinations we will use a sharedViewModel in the Activity scope.
 
