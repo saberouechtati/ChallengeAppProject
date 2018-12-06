@@ -7,13 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * This is an implementention of GitHubService Interface
  */
 public class GitHubServiceBuilder {
-    public static final String BASE_URL = "https://api.github.com";
+
     private Retrofit retrofit;
 
     // Initialize Retrofit
-    public GitHubServiceBuilder() {
+    public GitHubServiceBuilder(String basicUrl) {
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(basicUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

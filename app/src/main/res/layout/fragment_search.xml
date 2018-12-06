@@ -15,36 +15,31 @@
     <TextView
         android:id="@+id/searchTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="8dp"
         android:text="@string/search_description"
         android:textColor="@color/colorAccent"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/usernameET"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/loginSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/loginSwitch" />
 
     <EditText
         android:id="@+id/usernameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/github_username"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/searchTextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/retrieve_button"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -53,6 +48,7 @@
         android:text="@string/retrieve_text"
         android:textColor="@color/colorPrimary"
         app:backgroundTint="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/usernameET"
         app:layout_constraintTop_toBottomOf="@+id/usernameET" />
 
@@ -60,11 +56,54 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/github_username_label"
         android:textColor="@color/grayDark"
-        app:layout_constraintBottom_toTopOf="@+id/usernameET"
-        app:layout_constraintStart_toStartOf="@+id/searchTextView" />
+        app:layout_constraintStart_toStartOf="@+id/searchTextView"
+        app:layout_constraintTop_toBottomOf="@+id/searchTextView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/default_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/loginSwitch"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/switch_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/historyTitle"
+        android:layout_width="0dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/history_text"
+        android:textColor="@color/colorAccent"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/retrieve_button"
+        app:layout_constraintTop_toBottomOf="@+id/retrieve_button" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/historyRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="164dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/historyTitle"
+        app:layout_constraintStart_toStartOf="@+id/historyTitle"
+        app:layout_constraintTop_toBottomOf="@+id/historyTitle" />
 
 </android.support.constraint.ConstraintLayout>
 

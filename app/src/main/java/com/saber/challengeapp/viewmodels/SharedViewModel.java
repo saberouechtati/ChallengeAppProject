@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.saber.challengeapp.data.AccessToken;
 import com.saber.challengeapp.data.GitHubUserRepo;
 import com.saber.challengeapp.service.GitHubService;
 import com.saber.challengeapp.service.GitHubServiceBuilder;
@@ -37,6 +38,10 @@ public class SharedViewModel extends ViewModel {
 
     // The selected user repository to display
     private final MutableLiveData<GitHubUserRepo> selectedUserRepo = new MutableLiveData<>();
+
+    // The user GitHub Access Token for login
+    private MutableLiveData<AccessToken> gitHubAccessToken = new MutableLiveData<>();
+
 
 
     // Gets the GitHub username
@@ -71,6 +76,16 @@ public class SharedViewModel extends ViewModel {
         return userRepoList;
     }
 
+    // Gets the GitHub user Access token for login
+    public LiveData<AccessToken> getGitHubAccessToken(final Context context, String code) {
+        if (gitHubAccessToken == null) {
+            gitHubAccessToken = new MutableLiveData<>();
+            this.context = context;
+            loadGitHubAccessToken(code);
+        }
+        return gitHubAccessToken;
+    }
+
     // Update the GitHub user repository list
     public void updateUserRepoList() {
         this.userRepoList = new MutableLiveData<>();
@@ -92,7 +107,8 @@ public class SharedViewModel extends ViewModel {
     // Loads the selected GitHub user repository list
     public void loadUserRepoList(String username) {
         // Loads the list using Retrofit
-        GitHubService gitHubService = new GitHubServiceBuilder().getService();
+        final String BASIC_URL = context.getString(R.string.gitHub_api_basic_url);
+        GitHubService gitHubService = new GitHubServiceBuilder(BASIC_URL).getService();
         Call<List<GitHubUserRepo>> userRepoListCall = gitHubService.listRepos(username);
         userRepoListCall.enqueue(new Callback<List<GitHubUserRepo>>() {
 
@@ -111,6 +127,39 @@ public class SharedViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<GitHubUserRepo>> call, Throwable t) {
                 userRepoList.setValue(null);
+                Toast.makeText(context,
+                        context.getString(R.string.Load_failed),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Loads the GitHub Access Token for the login
+    public void loadGitHubAccessToken(String code) {
+        // Loads the Access Token
+        final String BASIC_URL = context.getString(R.string.gitHub_basic_url);
+        GitHubService gitHubService = new GitHubServiceBuilder(BASIC_URL).getService();
+        Call<AccessToken> accessTokenCall = gitHubService.getAccessToken(
+                context.getString(R.string.githubClientId),
+                context.getString(R.string.githubClientSecret),
+                code);
+        accessTokenCall.enqueue(new Callback<AccessToken>() {
+
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.isSuccessful()) {
+                    gitHubAccessToken.setValue(response.body());
+                } else {
+                    gitHubAccessToken.setValue(null);
+                    Toast.makeText(context,
+                            context.getString(R.string.request_failed),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+                gitHubAccessToken.setValue(null);
                 Toast.makeText(context,
                         context.getString(R.string.Load_failed),
                         Toast.LENGTH_SHORT).show();

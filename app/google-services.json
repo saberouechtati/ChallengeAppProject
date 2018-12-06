@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1054123329889",
+    "firebase_url": "https://challenge-app-768bd.firebaseio.com",
+    "project_id": "challenge-app-768bd",
+    "storage_bucket": "challenge-app-768bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054123329889:android:c8bd90f7d159384f",
+        "android_client_info": {
+          "package_name": "com.saber.challengeappproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054123329889-penqvkbbol0mm4ae0tgba1eb8bhlsop7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcIfR4Hh8-OtkVWyLqACA2l8V78Hzpap8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

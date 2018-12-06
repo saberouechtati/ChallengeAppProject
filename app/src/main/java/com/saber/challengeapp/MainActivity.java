@@ -2,20 +2,22 @@ package com.saber.challengeapp;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
+import com.saber.challengeapp.ui.LoginFragment;
 import com.saber.challengeapp.ui.SearchFragment;
+import com.saber.challengeapp.ui.SplashFragment;
 import com.saber.challengeapp.ui.UserRepoDetailFragment;
 import com.saber.challengeapp.ui.UserRepoListFragment;
-import com.saber.challengeapp.ui.SplashFragment;
-
 import com.saber.challengeapp.viewmodels.SharedViewModel;
 import com.saber.challengeappproject.R;
 
+import static com.saber.challengeapp.utils.Destinations.Master_UserRepoSearch;
 import static com.saber.challengeapp.utils.Destinations.Splash_UserRepoList;
 import static com.saber.challengeapp.utils.Destinations.Start_SplashScreen;
 
@@ -43,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        // Sets the context
         context = this;
+
         if (savedInstanceState == null) {
 
             // Initialize the shared ViewModel
@@ -105,8 +110,9 @@ public class MainActivity extends AppCompatActivity {
      * Navigats to the login dstination
      */
     private void navigateToLogin() {
+
         // Initialize, display, and navigate to the login destination
-        fragment = UserRepoListFragment.newInstance();
+        fragment = LoginFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.fragment_open_translate, R.anim.fragment_close_scale)
                 .replace(R.id.container, fragment)
@@ -117,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
      * Navigats to the search dstination
      */
     private void navigateToSearch() {
+
         // Initialize, display, and navigate the search destination
         fragment = SearchFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
@@ -150,6 +157,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Uri uri = getIntent().getData();
+        if(uri != null && uri.toString().startsWith(getString(R.string.redirectUrl))) {
+        String code = uri.getQueryParameter("code");
+
+        // TODO: Using the code do a Retrofit call (getAccessToken) to get and store the AccessToken in the sharedViewModel.
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         //closing transition animations
@@ -168,6 +186,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case Master_UserRepoSearch:
                 sharedViewModel.navigate(Splash_UserRepoList);
+                break;
+            case Master_Login:
+                sharedViewModel.navigate(Master_UserRepoSearch);
                 break;
             default:
                 super.onBackPressed();

@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Switch;
 
+import com.saber.challengeapp.utils.Destinations;
 import com.saber.challengeapp.viewmodels.SharedViewModel;
 import com.saber.challengeappproject.R;
 
@@ -35,6 +37,9 @@ public class SearchFragment extends Fragment {
 
     // The username EditText
     EditText usernameET;
+
+    // The login Switch
+    private Switch loginSwitch;
 
     // Required empty public constructor
     public SearchFragment() {
@@ -66,13 +71,22 @@ public class SearchFragment extends Fragment {
         //Initialize the username EditText
         usernameET = rootView.findViewById(R.id.usernameET);
 
+        // Initialize the login Switch
+        loginSwitch = rootView.findViewById(R.id.loginSwitch);
+
+        // set the current state of a Switch
+        loginSwitch.setChecked(false);
+
         // Sets Retrieve button onClickListener
         retrieveBtn.setOnClickListener(view -> {
             hideSoftKeyboard();
             String username = usernameET.getText().toString();
             sharedViewModel.updateUsername(username);
             sharedViewModel.updateUserRepoList();
-            sharedViewModel.navigate(Splash_UserRepoList);
+
+            // check if the user want to login and save his search history
+            if(loginSwitch.isChecked()) sharedViewModel.navigate(Destinations.Master_Login);
+            else sharedViewModel.navigate(Splash_UserRepoList);
         });
         return rootView;
     }

@@ -40,5 +40,16 @@
     <string name="github_username">facebook</string>
     <string name="github_username_label">Please enter a GitHub username</string>
     <string name="default_username">facebook</string>
+    <string name="switch_text">I want to login and save my retrieved repository list history.</string>
+    <string name="history_text">Retrieved repository list history</string>
+    <string name="login_title">Login</string>
+    <string name="github_login_text">Login with your GitHub account</string>
+
+    <string name="githubClientId">1d41d701007ac3925a6c</string>
+    <string name="githubClientSecret">b89e82c79cadc9b4f9922120b4fdaaab639d61a7</string>
+    <string name="redirectUrl">challengeapp://callback</string>
+    <string name="gitHubOauthUrl">https://github.com/login/oauth/authorize</string>
+    <string name="gitHub_api_basic_url">https://api.github.com</string>
+    <string name="gitHub_basic_url">https://github.com</string>
 
 </resources>

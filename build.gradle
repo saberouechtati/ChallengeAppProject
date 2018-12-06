@@ -24,7 +24,8 @@ buildscript {
         supportV4Version = '28.0.0'
         roomCompilerVersion = '1.1.1'
         lifecycleCompilerVersion = '1.1.1'
-        //  pagingRuntimeVersion = '1.0.1'
+        googleServices = '4.0.1'
+
 
         // Testing dependencies
         junitVersion = '4.12'
@@ -40,6 +41,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "com.google.gms:google-services:$googleServices"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

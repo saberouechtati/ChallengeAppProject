@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -9,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     testOptions {
         unitTests.includeAndroidResources = true
@@ -45,7 +47,6 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycleCompilerVersion"
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleExtensionsVersion"
-
 
 
     // Testing dependencies
