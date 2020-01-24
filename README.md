@@ -2,7 +2,7 @@
 Android challenge application project to retrieve a list of public repositories of a GitHub user using the Github API, and display them.
 
 
-![Challenge App main screen](https://user-images.githubusercontent.com/44888296/73044601-8a8a5b00-3e6a-11ea-84a9-b906d78fead4.jpg |  width=200)
+<img src="https://user-images.githubusercontent.com/44888296/73044601-8a8a5b00-3e6a-11ea-84a9-b906d78fead4.jpg" data-canonical-src="https://user-images.githubusercontent.com/44888296/73044601-8a8a5b00-3e6a-11ea-84a9-b906d78fead4.jpg" width="200" />
 
 ## Presentation: 
 https://prezi.com/view/6tEBVW9R9tOrz5DL3ItN/
