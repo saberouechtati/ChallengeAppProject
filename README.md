@@ -10,7 +10,7 @@ https://prezi.com/view/6tEBVW9R9tOrz5DL3ItN/
 
 
 # Getting started
-You can glone or download this project to your local machine.
+You can clone or download this project to your local machine.
 
 # Dependencies
 
